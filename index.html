@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
+    <title>View Page</title>
+</head>
+
+<body>
+    <header class="header">
+        <nav class="header__nav">
+            <div class="header__tabs">
+                <h2 class="header__logo">My Store</h2>
+                <a href="" class="link">Fishing Rods</a>
+                <a href="" class="link">Create a Rod</a>
+            </div>
+            <div class="header__search-section">
+                <input type="text" placeholder="Type something..." class="header__search-form">
+                <button class="header__search-button button" onclick="searchOnClick()">Search</button>
+                <button class="header__clear-button button" onclick="clearOnClick()">Clear</button>
+            </div>
+        </nav>
+    </header>
+    <div class="main">
+        <aside>
+            <h2 class="aside__title">Manage Rods</h2>
+            <div class="aside__section">
+                <p class="aside__text">Sort by the most expensive rod</p>
+                <button class="aside__switch" onclick="sortOnClick()">
+                    <div class="aside__round-slider"></div>
+                </button>
+            </div>
+            <hr>
+            <div class="aside__section">
+                <p class="aside__text">Count total daily expenses</p>
+                <button class="aside__count-button button" onclick="countOnClick()">Count</button>
+                <div class="aside__price-container">
+                    <p class="aside__text">Total expenses:</p>
+                    <p class="aside__price"></p>
+                </div>
+                <p class="aside__text">Add Rods</p>
+                <button class="aside__add-button button" onclick="addOnClick()">Add</button>
+            </div>
+        </aside>
+
+        <section class="section">
+        </section>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+
+</html>

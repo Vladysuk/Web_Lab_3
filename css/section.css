@@ -1,0 +1,52 @@
+.section{
+    display:flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 1200px;
+}
+
+.section__rod {
+    margin: 10px;
+    width: 200px;
+    height: 220px;
+    border: 2px blue solid;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.section__rod-name {
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 10px;
+    color: rgb(25, 90, 211);
+}
+
+.section__rod-description {
+    color: cornflowerblue;
+}
+
+.section__rod-price{
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: cornflowerblue;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.section__rod-buttons{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.section__edit-button{
+    color: #fff;
+    background-color: rgb(114, 61, 238);
+}
+
+.section__remove-button{
+    color: #fff;
+    background-color: rgb(173, 61, 238);
+}
