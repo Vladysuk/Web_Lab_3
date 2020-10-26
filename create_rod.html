@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/create_edit_rod.css">
+    <title>Create a Rod</title>
+</head>
+
+<body>
+    <header class="header">
+        <nav class="header__nav">
+            <div class="header__tabs">
+                <h2 class="header__logo">My Store</h2>
+                <a href="index.html" class="link">Fishing Rods</a>
+                <a href="create_rod.html" class="link">Create a Rod</a>
+            </div>
+        </nav>
+    </header>
+    <section class='section__container'>
+        <h1>Create a Rod</h1>
+        <div class="section__form-control">
+            <label for="name">Name</label>
+            <input type="text" id="rod-name" placeholder="Text..." class="section__input-form">
+        </div>
+        <div class="section__form-control">
+            <label for="description">Description</label>
+            <textarea id="rod-description" rows="10" class="section__input-form"></textarea>
+        </div>
+        <div class="section__form-control">
+            <label for="price">Price</label>
+            <input type="number" id="rod-price" class="section__input-form">
+        </div>
+        <button class="section__submit-button button" onclick="submitOnClick()">Submit</button>
+    </section>
+    <div class="modal-box">
+        <div class="modal-content"></div>
+        <span class="modal-close">&times;</span>
+    </div>
+    <script src="/js/create_edit_rod.js"></script>
+</body>
+
+</html>

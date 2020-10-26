@@ -1,10 +1,12 @@
-const searchButton = document.querySelector(".header__search-button");
-const clearButton = document.querySelector(".header__clear-button");
 const sortButton = document.querySelector(".aside__switch");
 const sortButtonSlider = document.querySelector(".aside__round-slider");
+const removeButton = document.querySelector(".section__remove-button");
 const section = document.querySelector(".section");
 const rodsList = [];
+let sortedList = [];
+let isSorted = false;
 let counter = 0;
+
 
 class FishingRod {
   constructor(id, name, description, price) {
@@ -15,12 +17,7 @@ class FishingRod {
   }
 }
 
-const rodSchema = ({
-  id,
-  name,
-  description,
-  price,
-}) => `<div class="section__rod" id="${id}">
+const rodSchema = ({ id, name, description, price }) => `<div class="section__rod" id="${id}">
               <div class="section__rod-name">${name}</div>
               <div class="section__rod-description">${description}</div>
               <div class="section__rod-footer">
@@ -29,22 +26,16 @@ const rodSchema = ({
                       <span>${price}$</span>
                   </div>
                   <div class="section__rod-buttons">
-                      <button class="section__edit-button button">Edit</button>
+                      <button class="section__edit-button button"><a href="edit_rod.html" class="link">Edit</a></button>
                       <button class="section__remove-button button">Remove</button>
                   </div>
               </div>
           </div>`;
 
 const addRod = ({ id, name, description, price }) => {
-  let rodContainer = section;
-  rodContainer.insertAdjacentHTML(
+  section.insertAdjacentHTML(
     "beforeend",
-    rodSchema({
-      id,
-      name,
-      description,
-      price,
-    })
+    rodSchema({ id, name, description, price })
   );
 };
 
@@ -57,37 +48,30 @@ function addOnClick() {
   let price = Math.floor(Math.random() * 1000);
   let rod = new FishingRod(id, name, description, price);
   rodsList.push(rod);
-  addRod({
-    id,
-    name,
-    description,
-    price,
-  });
+  addRod({ id, name, description, price });
   sortButton.classList.remove("active");
   sortButtonSlider.classList.remove("active");
 }
 
-function updateDOM(givenList) {
+function updateDOM(items) {
   section.innerHTML = "";
-  for (let i = 0; i < givenList.length; i++) {
-    let id = givenList.id;
-    let name = givenList[i].name;
-    let description = givenList[i].description;
-    let price = givenList[i].price;
-    addRod({
-      id,
-      name,
-      description,
-      price,
-    });
+  for (const item of items) {
+    addRod(item);
   }
 }
 
 function sortOnClick() {
   sortButton.classList.toggle("active");
   sortButtonSlider.classList.toggle("active");
-  rodsList.sort((a, b) => b.price - a.price);
-  updateDOM(rodsList);
+  if (isSorted) {
+    updateDOM(rodsList);
+    isSorted = false;
+    return
+  }
+  sortedList = [...rodsList];
+  sortedList.sort((a, b) => b.price - a.price);
+  updateDOM(sortedList);
+  isSorted = true;
 }
 
 function countOnClick() {
@@ -104,7 +88,8 @@ function searchOnClick() {
   updateDOM(filteredRods);
 }
 
-function clearOnClick(){
-    document.querySelector(".header__search-form").value = "";
-    updateDOM(rodsList);
+function clearOnClick() {
+  document.querySelector(".header__search-form").value = "";
+  updateDOM(rodsList);
 }
+
