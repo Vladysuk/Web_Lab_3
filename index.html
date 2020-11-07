@@ -18,8 +18,8 @@
             </div>
             <div class="header__search-section">
                 <input type="text" placeholder="Type something..." class="header__search-form">
-                <button class="header__search-button button" onclick="searchOnClick()">Search</button>
-                <button class="header__clear-button button" onclick="clearOnClick()">Clear</button>
+                <button class="header__search-button button">Search</button>
+                <button class="header__clear-button button">Clear</button>
             </div>
         </nav>
     </header>
@@ -28,20 +28,18 @@
             <h2 class="aside__title">Manage Rods</h2>
             <div class="aside__section">
                 <p class="aside__text">Sort by the most expensive rod</p>
-                <button class="aside__switch" onclick="sortOnClick()">
+                <button class="aside__switch">
                     <div class="aside__round-slider"></div>
                 </button>
             </div>
             <hr>
             <div class="aside__section">
                 <p class="aside__text">Count total daily expenses</p>
-                <button class="aside__count-button button" onclick="countOnClick()">Count</button>
+                <button class="aside__count-button button">Count</button>
                 <div class="aside__price-container">
                     <p class="aside__text">Total expenses:</p>
                     <p class="aside__price"></p>
-                </div>
-                <p class="aside__text">Add Rods</p>
-                <button class="aside__add-button button" onclick="addOnClick()">Add</button>
+                </div>  
             </div>
         </aside>
 
@@ -49,7 +47,7 @@
         </section>
     </div>
 
-    <script src="js/main.js"></script>
+    <script src="js/main.js" type="module"></script>
 </body>
 
 </html>

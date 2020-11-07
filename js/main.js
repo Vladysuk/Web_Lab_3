@@ -1,21 +1,19 @@
+import {getAllRods, deleteRod} from "./api.js"
 const sortButton = document.querySelector(".aside__switch");
 const sortButtonSlider = document.querySelector(".aside__round-slider");
+const countButton = document.querySelector(".aside__count-button ");
+const searchButton = document.querySelector(".header__search-button");
+const clearButton = document.querySelector(".header__clear-button");
 const removeButton = document.querySelector(".section__remove-button");
+const addButton = document.querySelector(".aside__add-button")
 const section = document.querySelector(".section");
-const rodsList = [];
+export let rodId;
+
+let rodsList = [];
 let sortedList = [];
 let isSorted = false;
 let counter = 0;
 
-
-class FishingRod {
-  constructor(id, name, description, price) {
-    this.id = id;
-    this.name = name;
-    this.description = description;
-    this.price = price;
-  }
-}
 
 const rodSchema = ({ id, name, description, price }) => `<div class="section__rod" id="${id}">
               <div class="section__rod-name">${name}</div>
@@ -26,32 +24,20 @@ const rodSchema = ({ id, name, description, price }) => `<div class="section__ro
                       <span>${price}$</span>
                   </div>
                   <div class="section__rod-buttons">
-                      <button class="section__edit-button button"><a href="edit_rod.html" class="link">Edit</a></button>
-                      <button class="section__remove-button button">Remove</button>
+                      <button id='edit-button-${id}' class="section__edit-button button"><a href="edit_rod.html?id=${id}" class="link">Edit</a></button>
+                      <button id='remove-button-${id}' class="section__remove-button button">Remove</button>
                   </div>
               </div>
           </div>`;
 
 const addRod = ({ id, name, description, price }) => {
-  section.insertAdjacentHTML(
-    "beforeend",
-    rodSchema({ id, name, description, price })
-  );
+  section.insertAdjacentHTML("beforeend", rodSchema({ id, name, description, price }));
+  document.getElementById("remove-button-"+id).addEventListener('click', async () =>{
+    await deleteRod(id);
+    refetchAllRods();
+  })
 };
 
-function addOnClick() {
-  let id = counter;
-  counter += 1;
-  let name = `Rod ${id}`;
-  let description =
-    "Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis nesciunt inventore laudantium nulla, cupiditate fugit.";
-  let price = Math.floor(Math.random() * 1000);
-  let rod = new FishingRod(id, name, description, price);
-  rodsList.push(rod);
-  addRod({ id, name, description, price });
-  sortButton.classList.remove("active");
-  sortButtonSlider.classList.remove("active");
-}
 
 function updateDOM(items) {
   section.innerHTML = "";
@@ -60,7 +46,8 @@ function updateDOM(items) {
   }
 }
 
-function sortOnClick() {
+sortButton.addEventListener("click", (event) => {
+  event.preventDefault();
   sortButton.classList.toggle("active");
   sortButtonSlider.classList.toggle("active");
   if (isSorted) {
@@ -72,24 +59,35 @@ function sortOnClick() {
   sortedList.sort((a, b) => b.price - a.price);
   updateDOM(sortedList);
   isSorted = true;
-}
+})
 
-function countOnClick() {
+countButton.addEventListener('click', (event) => {
+  event.preventDefault();
   let totalPrice = rodsList.reduce((counter, rod) => (counter += rod.price), 0);
   document.querySelector(".aside__price").innerText = totalPrice + "$";
-}
+})
 
-function searchOnClick() {
+searchButton.addEventListener('click', (event) => {
+  event.preventDefault();
   let text = document.querySelector(".header__search-form").value;
   let pattern = new RegExp(text);
   let filteredRods = rodsList.filter(
     (rod) => pattern.test(rod.name) || pattern.test(rod.text)
   );
   updateDOM(filteredRods);
-}
+}) 
 
-function clearOnClick() {
+clearButton.addEventListener('click', (event) => {
+  event.preventDefault();
   document.querySelector(".header__search-form").value = "";
   updateDOM(rodsList);
-}
+})
 
+
+const refetchAllRods = async () => {
+  const allRods = await getAllRods();
+  rodsList = allRods;    
+  updateDOM(rodsList);
+};
+
+refetchAllRods(); 

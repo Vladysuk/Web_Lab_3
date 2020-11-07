@@ -113,7 +113,7 @@ body {
     from {bottom: -20px; opacity: 0}
     to {bottom: 0; opacity: 1}
 }
-  
+ 
 .modal-content {
     margin-left: 20px;
     font-size: 18px;

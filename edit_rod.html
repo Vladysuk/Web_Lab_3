@@ -14,7 +14,7 @@
             <div class="header__tabs">
                 <h2 class="header__logo">My Store</h2>
                 <a href="index.html" class="link">Fishing Rods</a>
-                <a href="create_rod.html" class="link">Edit a Rod</a>
+                <a href="edit_rod.html" class="link">Edit a Rod</a>
             </div>
         </nav>
     </header>
@@ -32,13 +32,14 @@
             <label for="price">Price</label>
             <input type="number" id="rod-price" class="section__input-form">
         </div>
-        <button class="section__submit-button button" onclick="submitOnClick()">Submit</button>
+        <button class="section__submit-button button">Submit</button>
     </section>
     <div class="modal-box">
         <div class="modal-content"></div>
         <span class="modal-close">&times;</span>
     </div>
-    <script src="/js/create_edit_rod.js"></script>
+    <script src="/js/create_edit_rod.js" type="module"></script>
+    <script src="/js/edit.js" type="module"></script>
 </body>
 
 </html>

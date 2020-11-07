@@ -1,11 +1,12 @@
-const nameInput = document.getElementById("rod-name");
-const descriptionInput = document.getElementById("rod-description");
-const priceInput = document.getElementById("rod-price");
-const modalBox = document.querySelector(".modal-box");
+export const nameInput = document.getElementById("rod-name");
+export const descriptionInput = document.getElementById("rod-description");
+export const priceInput = document.getElementById("rod-price");
+export const modalBox = document.querySelector(".modal-box");
 const modalContent = document.querySelector(".modal-content");
 const closeSign = document.querySelector(".modal-close");
+export const submitButton = document.querySelector(".section__submit-button")
 
-function clearInputs() {
+export function clearInputs() {
   nameInput.value = "";
   descriptionInput.value = "";
   priceInput.value = "";
@@ -33,13 +34,13 @@ function showErrorMore(input, max) {
   modalBox.style.color = "red";
 }
 
-function showSuccess() {
+export function showSuccess() {
   modalBox.style.display = "flex";
   modalContent.innerText = "That's a success";
   modalBox.style.color = "green";
 }
 
-function checkRequired(inputArr) {
+export function checkRequired(inputArr) {
   let isRequired = false;
   inputArr.forEach(function (input) {
     if (input.value.trim() === '') {
@@ -50,7 +51,7 @@ function checkRequired(inputArr) {
   return isRequired;
 }
 
-function checkLength(input, min, max) {
+export function checkLength(input, min, max) {
   if (input.value.length < min) {
     showErrorLess(getFieldName(input), min);
     return
@@ -64,16 +65,11 @@ function getFieldName(input) {
   return input.id.charAt(4).toUpperCase() + input.id.slice(5);
 }
 
-
-function submitOnClick() {
-  modalBox.style.display = "none";
-  if (!checkRequired([nameInput, descriptionInput, priceInput])) {
-    checkLength(nameInput, 3, 20);
-    checkLength(descriptionInput, 6, 60);
-    checkLength(priceInput, 2, 15);
-    if(modalBox.style.display == "none"){
-      showSuccess();
-    } 
-  }
-  clearInputs();
+export const getFeildsValue = () => {
+  return {
+    name: nameInput.value,
+    description: descriptionInput.value,
+    price: priceInput.value
+  };
 }
+
